@@ -1,0 +1,1 @@
+php F:\WAMP\www\api07\vendor\doctrine\orm\bin\doctrine.php orm:schema-tool:update --force
