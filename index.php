@@ -1,8 +1,3 @@
-<?php
-
-require_once "./vendor/autoload.php";
-
-?>
 
 <!DOCTYPE html>
 <html>
@@ -21,6 +16,7 @@ require_once "./vendor/autoload.php";
             <input type="submit" value="Se connecter" />
             </p>
         </form>
-        <p>Cette page est réservée aux employés du service de la médecine du travail ! ;-)</p>
+        <p>Cette page est réservée aux employés du service de la médecine du travail ! ;-)  hardcorepassword</p>
+
     </body>
 </html>
