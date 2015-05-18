@@ -41,8 +41,8 @@ require_once './model/dossier.php';
         <h1>Bienvenue Médecin ! <?php echo $_SESSION['user']; ?> </h1>
 		<p> <a href="./etat_civil.php">Etat civil et coordonnées</a> </p>
 		
-		<p> <a href="./antecedents.php">Antécédents médicaux</a> </p>
-		<p> <a href="./vaccinations.php">Vaccinations</a> </p>
+		<p> <a href="./antecedents.php">Antécédents médicaux et vaccinations</a> </p>
+		
         <p> <a href="./logout.php">Déconnexion</a> </p>
 
 		
@@ -77,8 +77,8 @@ require_once './model/dossier.php';
 		<h1>Bienvenue Employé ! </h1>
 		<p> <a href="./etat_civil.php">Etat civil et coordonnées</a> </p>
 		
-		<p> <a href="./antecedents.php">Antécédents médicaux</a> </p>
-		<p> <a href="./vaccinations.php">Vaccinations</a> </p>
+		<p> <a href="./antecedents.php">Antécédents médicaux et vaccinations</a> </p>
+		
         <p> <a href="./logout.php">Déconnexion</a> </p>
 		<?php
 			}
