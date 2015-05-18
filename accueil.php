@@ -1,12 +1,15 @@
 <?php
-
+session_start();
 require_once "./vendor/autoload.php";
-$_SESSION['entity_manager'] = require "./src/bootstrap.php";
+require "./src/bootstrap.php";
 
 require_once './model/user.php';
 require_once './model/dossier.php';
 
 ?>
+
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,7 +26,9 @@ require_once './model/dossier.php';
     		$user = $entityManager->getRepository('User')->find($_POST['login']);
     		if(!is_null($user)){
     			if(password_verify($_POST['pwd'], $user->password)){
-    				$_SESSION['user'] = $user;
+    				$_SESSION['user'] = $user->login;
+				
+			
     		
     ?>
         <h1>Bienvenue Médecin ! </h1>

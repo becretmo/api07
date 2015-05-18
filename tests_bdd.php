@@ -7,8 +7,8 @@ require_once './model/user.php';
 require_once './model/dossier.php';
 
 $user = new User();
-$user->login = "infirmiere";
-$user->password = password_hash("hardcorepassword", PASSWORD_BCRYPT);
+$user->login = "employe";
+$user->password = password_hash("emp", PASSWORD_BCRYPT);
 
 $entityManager->persist($user);
 $entityManager->flush();
