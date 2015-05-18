@@ -15,7 +15,8 @@ require "./src/bootstrap.php";
     <body>
     
     <?php
-		
+		echo session_id();
+		//echo $_SESSION['user'];
     	if (isset($_SESSION['user']) && $_SESSION['user'] ==  "medecin"){
     		$users = $entityManager->getRepository('User')->findAll();
 	?>
@@ -30,13 +31,13 @@ require "./src/bootstrap.php";
 				</select>
 				<INPUT TYPE="submit" NAME="valider" VALUE="valider"> 
 			</form>
+			<a href="./accueil.php">Retour</a> </p>
 	<?php
 			if(isset($_POST['selectbasic'])) {
 				$user = $entityManager->getRepository('User')->find($_POST['selectbasic']);
-				echo $user->dossier->etat_civil;
-				echo $user->dossier->coords;
+				echo "Etat civil :".$user->dossier->etat_civil."\n";
 				
-			
+				echo "Adresse :".$user->dossier->coords;
 			}
 		}
     	else if (isset($_SESSION['user']) && $_SESSION['user'] ==  "infirmiere"){
@@ -54,22 +55,36 @@ require "./src/bootstrap.php";
 				</select>
 				<INPUT TYPE="submit" NAME="valider" VALUE="valider"> 
 			</form>
+			<a href="./accueil.php">Retour</a> </p>
 	<?php
+			if(isset($_POST['selectbasic2'])) {
+				$user = $entityManager->getRepository('User')->find($_POST['selectbasic2']);
+			?>
+				<form method="POST" action="./etat_civil.php">
+				<select id="modif" name="modif" class="form-control">
+					<option value="0"> -- Etat civil -- </option>
+					<option value="M" <?php if(isset($user->dossier->etat_civil) && $user->dossier->etat_civil=="M") echo "selected"; ?>> -- M. -- </option>
+					<option value="Mme" <?php if(isset($user->dossier->etat_civil) && $user->dossier->etat_civil=="Mme") echo "selected"; ?>> -- Mme -- </option>
+				</select>
+				<input type="textarea" name="coord" value=<?php if(isset($user->dossier->coords)) echo $user->dossier->coords; ?>>
+				<INPUT TYPE="submit" NAME="modifier" VALUE="modifier"> 
+			</form>
+	<?php
+			}
 		} 
     	else if (isset($_SESSION['user']) && $_SESSION['user'] ==  "employe"){
-    		$user = $entityManager->getRepository('User')->find($_SESSION['user']->login);
+    		$user = $entityManager->getRepository('User')->find($_SESSION['user']);
 	?>
-			<form  action="./etat_civil.php" method="POST">
-				<LABEL for="etat"> Etat Civil : </label>
-				<select id="selectetat" name="selectetat" class="form-control">
-					<option value="0" > -- Etat civil -- </option>
-					<option value="1"> -- M. -- </option>
-					<option value="2"> -- Mme -- </option>
+				<form method="POST" action="./etat_civil.php">
+				<select id="modifemp" name="modifemp" class="form-control">
+					<option value="0"> -- Etat civil -- </option>
+					<option value="M" <?php if(isset($user->dossier->etat_civil) && $user->dossier->etat_civil=="M") echo "selected"; ?>> -- M. -- </option>
+					<option value="Mme" <?php if(isset($user->dossier->etat_civil) && $user->dossier->etat_civil=="Mme") echo "selected"; ?>> -- Mme -- </option>
 				</select>
-				<LABEL for="coord"> Adresse : </label>
-				<input type="text" name="coord" value=<?php echo("'".$user->coords()."'"); ?> />
-				<INPUT TYPE="submit" NAME="enregistrer" VALUE="Enregistrer"> 
+				<input type="textarea" name="coord" value=<?php if(isset($user->dossier->coords)) echo $user->dossier->coords; ?>>
+				<INPUT TYPE="submit" NAME="modifier" VALUE="modifier"> 
 			</form>
+			<a href="./accueil.php">Retour</a> </p>
 	<?php
 		} 
 	?>

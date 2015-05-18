@@ -22,7 +22,7 @@ require_once './model/dossier.php';
     <body>
     
     <?php
-
+	echo session_id();
     $login = htmlspecialchars($_POST['login']);
     $pwd = htmlspecialchars($_POST['pwd']);
 		// if (isset($login) AND $login ==  "medecin" AND isset($pwd) AND $pwd ==  "medecin") // Si login et le mot de passe sont OK
@@ -32,15 +32,15 @@ require_once './model/dossier.php';
     		$user = $entityManager->getRepository('User')->find($login);
     		if(!is_null($user)){
 
-    			if(password_verify($_POST['pwd'], $user->password)){
+    			if(password_verify($pwd, $user->password)){
     				$_SESSION['user'] = $user->login;
 				
 			
     		
     ?>
         <h1>Bienvenue Médecin ! <?php echo $_SESSION['user']; ?> </h1>
-		<p> <a href="./etat_civil.php">Etat civil</a> </p>
-		<p> <a href="./coordonnees.php">Coordonnées</a> </p>
+		<p> <a href="./etat_civil.php">Etat civil et coordonnées</a> </p>
+		
 		<p> <a href="./antecedents.php">Antécédents médicaux</a> </p>
 		<p> <a href="./vaccinations.php">Vaccinations</a> </p>
         <p> <a href="./logout.php">Déconnexion</a> </p>
@@ -60,8 +60,8 @@ require_once './model/dossier.php';
     				$_SESSION['user'] = $user;
 	?>
 		<h1>Bienvenue Infirmière ! </h1>
-		<p> <a href="./etat_civil.php">Etat civil</a> </p>
-		<p> <a href="./coordonnees.php">Coordonnées</a> </p>
+		<p> <a href="./etat_civil.php">Etat civil et coordonnées</a> </p>
+		
         <p> <a href="./logout.php">Déconnexion</a> </p>
 		<?php
 			}
@@ -75,8 +75,8 @@ require_once './model/dossier.php';
     				$_SESSION['user'] = $user;
 		?>
 		<h1>Bienvenue Employé ! </h1>
-		<p> <a href="./etat_civil.php">Etat civil</a> </p>
-		<p> <a href="./coordonnees.php">Coordonnées</a> </p>
+		<p> <a href="./etat_civil.php">Etat civil et coordonnées</a> </p>
+		
 		<p> <a href="./antecedents.php">Antécédents médicaux</a> </p>
 		<p> <a href="./vaccinations.php">Vaccinations</a> </p>
         <p> <a href="./logout.php">Déconnexion</a> </p>
