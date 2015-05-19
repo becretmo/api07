@@ -44,29 +44,36 @@ require_once './model/dossier.php';
         <label>Sélectionner un utilisateur :</label>
         <select name="sel_user">
         	<?php
-        	$users = $entityManager->getRepository('User')->findAll();
-        	foreach ($users as $u) {
-        		echo "<option value='".$u->login."'>".$u->login."</option>";
-        	}
+            if ($user == "employe") {
+                echo "<option value='employe'>employe</option>";
+            }
+            elseif($user == "medecin") {
+        	   $users = $entityManager->getRepository('User')->findAll();
+        	   foreach ($users as $u) {
+        		  echo "<option value='".$u->login."'>".$u->login."</option>";
+        	   }
+            }
+
         	?>
             </select>
         	<input type="submit" value="Valider" />
-        </form> 
+        </form>
         <br><br>
         <form method="GET" action="./antecedents.php">
             <label>Antécédents de <?php if(isset($selected_user)) echo $selected_user->login; ?> :</label>
-            <input type="text" name="antc" value=<?php if(isset($selected_user)) echo "'".$selected_user->dossier->antc."'"; if($user != 'medecin') echo "disabled"; ?> ></value>
-            <input type="hidden" name="login" value=<?php if(isset($selected_user)) echo "'".$selected_user->login."'"; ?> />
-            <?php if($user == 'medecin') echo "<input type='submit' />"; else echo "<br>Vous n'avez pas le droit de modifier les antécédants médicaux"; ?>
+            <input type="text" name="antc" value=<?php if(isset($selected_user)) echo "'".$selected_user->dossier->antc."'"; if($user != 'medecin') echo "'' disabled"; ?> ><br><br>
+            <label>Vaccins de <?php if(isset($selected_user)) echo $selected_user->login; ?> :</label>
+            <input type="text" name="vacc" value=<?php if(isset($selected_user)) echo "'".$selected_user->dossier->vaccins."'"; if($user != 'medecin') echo "'' disabled"; ?> ><br>
+            <input type="hidden" name="login" value=<?php if(isset($selected_user)) echo "'".$selected_user->login."'"; ?> > 
+            <?php if($user == 'medecin') echo "<input type='submit' />"; else echo "Vous n'avez pas le droit de modifier les antécédants médicaux"; ?>
         </form>
 
-        <h2> Reste à faire les vaccinations !</h2>
 <?php	
 }
 
     if(isset($_GET['antc'])){ // On a envoyé une modification
-        $selected_user = $entityManager->getRepository('User')->find($_GET['login']);
-        $selected_user->dossier->antc = $_GET['antc'];
+        $selected_user->dossier->vaccins = htmlspecialchars($_GET['vacc']);
+        $selected_user->dossier->antc = htmlspecialchars($_GET['antc']);
         $entityManager->flush();
 
         echo "<p> Mise à jour réussie ! <a href='./accueil.php'>Revenir à l'accueil</a></p>";

@@ -34,7 +34,6 @@ function echo_erreur(){
     	if ($login ==  "medecin"){
     		$user = $entityManager->getRepository('User')->find($login);
     		if(!is_null($user)){
-
     			if(password_verify($pwd, $user->password)){
     				$_SESSION['user'] = $user->login;
     		}
@@ -46,7 +45,7 @@ function echo_erreur(){
     		$user = $entityManager->getRepository('User')->find($login);
     		if(!is_null($user)){
     			if(password_verify($pwd, $user->password)){
-    				$_SESSION['user'] = $user;
+    				$_SESSION['user'] = $user->login;
 			}
             else echo_erreur();
         }
@@ -56,19 +55,20 @@ function echo_erreur(){
     		$user = $entityManager->getRepository('User')->find($login);
     		if(!is_null($user)){
     			if(password_verify($pwd, $user->password)){
-    				$_SESSION['user'] = $user;
+    				$_SESSION['user'] = $user->login;
 			}
             else echo_erreur();
         }
         else echo_erreur();
 	}
+    else echo_erreur();
 }
 
     //On affiche la vue correspondante :
     if($_SESSION['user'] == "medecin"){
         ?>
         <h1>Bienvenue Médecin ! </h1>
-        <p> <a href="./etat_civil.php">Etat civil & coordonées</a> </p>
+        <p> <a href="./etat_civil.php">Etat civil & coordonnées</a> </p>
         <p> <a href="./antecedents.php">Antécédents médicaux & vaccinations</a> </p>
         <p> <a href="./logout.php">Déconnexion</a> </p>
         <?php
@@ -76,14 +76,14 @@ function echo_erreur(){
     elseif($_SESSION['user'] == "infirmiere"){
         ?>
         <h1>Bienvenue Infirmière ! </h1>
-        <p> <a href="./etat_civil.php">Etat civil & coordonées</a> </p>
+        <p> <a href="./etat_civil.php">Etat civil & coordonnées</a> </p>
         <p> <a href="./logout.php">Déconnexion</a> </p>
         <?php
     }
-    if($_SESSION['user'] == "employe"){
+    elseif($_SESSION['user'] == "employe"){
         ?>
         <h1>Bienvenue Employé ! </h1>
-        <p> <a href="./etat_civil.php">Etat civil & coordonées</a> </p>
+        <p> <a href="./etat_civil.php">Etat civil & coordonnées</a> </p>
         <p> <a href="./antecedents.php">Antécédents médicaux & vaccinations</a> </p>
         <p> <a href="./logout.php">Déconnexion</a> </p>
         <?php
