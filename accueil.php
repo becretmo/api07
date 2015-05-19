@@ -1,7 +1,9 @@
 <?php
 session_start();
 
+
 require "./vendor/autoload.php";
+
 require "./src/bootstrap.php";
 
 require_once './model/user.php';
@@ -12,6 +14,9 @@ function echo_erreur(){
 }
 
 ?>
+
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,6 +34,7 @@ function echo_erreur(){
     	if ($login ==  "medecin"){
     		$user = $entityManager->getRepository('User')->find($login);
     		if(!is_null($user)){
+
     			if(password_verify($pwd, $user->password)){
     				$_SESSION['user'] = $user->login;
     		}
