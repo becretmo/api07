@@ -28,7 +28,6 @@ require_once './model/dossier.php';
 
     if(isset($_GET['antc'])){ // On a envoyé une modification
         $selected_user = $entityManager->getRepository('User')->find($_GET['login']);
-        if($selected_user == null) echo "c'est null !!!!!!";
     }
     else
 
@@ -39,7 +38,7 @@ require_once './model/dossier.php';
     $user = $_SESSION['user'];
     		
     ?>
-        <h1>Modification des antécédants médicaux : </h1>
+        <h1>Antécédants médicaux et vaccinations : </h1>
         <p>Connecté en tant que : <?php echo $user ?> => <a href='./logout.php'>Déconnexion</a></p>
         <form method='GET' action='./antecedents.php'>
         <label>Sélectionner un utilisateur :</label>
@@ -60,6 +59,8 @@ require_once './model/dossier.php';
             <input type="hidden" name="login" value=<?php if(isset($selected_user)) echo "'".$selected_user->login."'"; ?> />
             <?php if($user == 'medecin') echo "<input type='submit' />"; else echo "<br>Vous n'avez pas le droit de modifier les antécédants médicaux"; ?>
         </form>
+
+        <h2> Reste à faire les vaccinations !</h2>
 <?php	
 }
 

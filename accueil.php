@@ -68,28 +68,23 @@ function echo_erreur(){
     if($_SESSION['user'] == "medecin"){
         ?>
         <h1>Bienvenue Médecin ! </h1>
-        <p> <a href="./etat_civil.php">Etat civil</a> </p>
-        <p> <a href="./coordonnees.php">Coordonnées</a> </p>
-        <p> <a href="./antecedents.php">Antécédents médicaux</a> </p>
-        <p> <a href="./vaccinations.php">Vaccinations</a> </p>
+        <p> <a href="./etat_civil.php">Etat civil & coordonées</a> </p>
+        <p> <a href="./antecedents.php">Antécédents médicaux & vaccinations</a> </p>
         <p> <a href="./logout.php">Déconnexion</a> </p>
         <?php
     }
     elseif($_SESSION['user'] == "infirmiere"){
         ?>
         <h1>Bienvenue Infirmière ! </h1>
-        <p> <a href="./etat_civil.php">Etat civil</a> </p>
-        <p> <a href="./coordonnees.php">Coordonnées</a> </p>
+        <p> <a href="./etat_civil.php">Etat civil & coordonées</a> </p>
         <p> <a href="./logout.php">Déconnexion</a> </p>
         <?php
     }
     if($_SESSION['user'] == "employe"){
         ?>
         <h1>Bienvenue Employé ! </h1>
-        <p> <a href="./etat_civil.php">Etat civil</a> </p>
-        <p> <a href="./coordonnees.php">Coordonnées</a> </p>
-        <p> <a href="./antecedents.php">Antécédents médicaux</a> </p>
-        <p> <a href="./vaccinations.php">Vaccinations</a> </p>
+        <p> <a href="./etat_civil.php">Etat civil & coordonées</a> </p>
+        <p> <a href="./antecedents.php">Antécédents médicaux & vaccinations</a> </p>
         <p> <a href="./logout.php">Déconnexion</a> </p>
         <?php
     }
